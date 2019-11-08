@@ -289,28 +289,25 @@ void solution13() {
 
 void solution14() {
     printf("\nЗадание 14 – автоморфные числа. Натуральное число называется автоморфным, если оно равно последним цифрам своего квадрата. Например, 25 \\ :sup: '​2' = 625. Напишите программу, которая получает на вход натуральное число N и выводит на экран все автоморфные числа, не превосходящие N.\n---\n");
-    long int N;
+    int N;
     printf("Введите натуральное число: ");
-    scanf("%li", &N);
-    
-    for (int number = 0; (number * number) <= N; number++) {                            // Цикл проходится по всем числам, чей квадрат не привосходит N
-        int amount = 0;                                                                 // Обнуляем длину числа
-        int a = (number * number);
-        do {
+    scanf("%i", &N);
+    for (int number = 0; (number * number) <= N; number++) {
+        int temp = number;
+        int amount = 1;
+        while (temp > 9) {
             amount++;
-            a /= 10;
-        } while (a != 0);
-        
+            temp /= 10;
+        }
         int exponent = 10;
-        for (int i = 1; i < amount; i++) {
-            exponent *= exponent;
+        int i = 1;
+        while (i < amount) {
+            exponent *= 10;
+            i++;
         }
-        
-        if (((number * number) % exponent) == number) {
-            printf("Число %i является автоморфным и не привосходит %li.\n", number, N);
-        }
+        if (((number * number) % exponent) == number) printf("Число %i является автоморфным и не привосходит %i.\n", number, N);
     }
-    printf("\n\n");
+    printf("\n");
 }
 
 int main(int argc, const char * argv[]) {
